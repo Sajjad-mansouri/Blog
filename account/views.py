@@ -96,11 +96,12 @@ def contact(request):
 			message=form.cleaned_data['message']
 			sender=form.cleaned_data['email']
 			name=form.cleaned_data['name']
+			to_mail=settings.EMAIL_HOST_USER
 			email = mail.EmailMessage(
 			subject,
 			f'hi {name}, thank you for commmenting',
-			'from@example.com',
-			['to1@example.com']
+			to_mail,
+			[sender]
 			)
 			
 			email.send() 
