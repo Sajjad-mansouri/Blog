@@ -1,0 +1,139 @@
+{%extends 'registration/base_registration.html'%}
+{%block title%} اطلاعات حساب کاربری{%endblock%}
+{%block content%}
+<div class="col-lg-8 pb-5">
+    <form method='POST' enctype='multipart/form-data'>
+        {%csrf_token%}
+        <div class="row">
+            <div class="col-lg-12"> {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <p {% if message.tags %} class=" alert alert-{{ message.tags }}" {% endif %}>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {%if form.errors%}
+                <div class='messages alert alert-danger'>
+                    <div>{{form.non_field_errors}}</div>
+                    {%for field in form%}
+                    <div>{{field.errors}}</div>
+                    {%endfor%}
+                </div>
+                {%endif%}</div>
+        </div>
+        <!-- Main content -->
+        <h3 class="h6 mb-4">مشخصات کاربری</h3>
+        <div class="row">
+            <!-- Left side -->
+            <div class="col-lg-12">
+                <!-- Basic information -->
+                <div class="cards mb-4">
+                    <div class="cards-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                {%if user.image%}
+                                <div class="mb-3">
+                                    <img src="{{user.avatar.url}}" width=100 height=100 style='border-radius: 50%;' alt="">
+                                </div>
+                                {%endif%}
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">نام کاربری: </label>
+                                    {{user.username}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">نام: </label>
+                                    {{user.first_name}}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">نام حانوادگی: </label>
+                                    {{user.last_name}}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">ایمیل: </label>
+                                    {{user.email}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="cards mb-4">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_article">
+                        ویرایش
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="delete_article" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form action="" method='POST'>
+                        {%csrf_token%}
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <span aria-hidden="true">ویرایش اطلاعات</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-right">
+                            <div class="row">
+                                <!-- Left side -->
+                                <div class="col-lg-12">
+                                    <!-- Basic information -->
+                                    <div class="cards mb-4">
+                                        <div class="cards-body">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">نام: </label>
+                                                        {{form.first_name}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">نام خانوادگی: </label>
+                                                        {{form.last_name}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">ایمیل: </label>
+                                                        {{form.email}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">عکس پروفایل: </label>
+                                                        {{form.avatar}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="cards mb-4">
+                                        <input class='btn btn-success' type="submit">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{%endblock%}

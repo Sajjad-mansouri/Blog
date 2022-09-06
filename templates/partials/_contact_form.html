@@ -1,0 +1,28 @@
+<form name="sentMessage" id="contactForms" action='{%url "contact"%}' method='POST'>
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="control-group">
+                {{form.name}}
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="control-group">
+                {{form.email}}
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        {{form.subject}}
+        <p class="help-block text-danger"></p>
+    </div>
+    <div class="control-group">
+        {{form.message}}
+        <p class="help-block text-danger"></p>
+    </div>
+    <div>
+        <button class="btn btn-primary font-weight-semi-bold px-4" style="height: 50px;" type="submit">ارسال پیام</button>
+    </div>
+</form>

@@ -1,0 +1,29 @@
+<nav aria-label="...">
+    <ul class="pagination">
+        {%if articles.has_previous%}
+        <li class="page-item ">
+            <a class="page-link" href="?page={{articles.previous_page_number}}" tabindex="-1">صقحه قبل</a>
+        </li>
+        {%else%}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">صفحه قبل</a>
+        </li>
+        {%endif%}
+        {%for page in articles.paginator.page_range%}
+        {%if articles.number == page %}
+        <li class="page-item disabled"><a class="page-link " href="">{{page}}</a></li>
+        {%else%}
+        <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+        {%endif%}
+        {%endfor%}
+        {%if articles.has_next%}
+        <li class="page-item">
+            <a class="page-link" href="?page={{articles.next_page_number}}">صفحه بعد</a>
+        </li>
+        {%else%}
+        <li class="page-item disabled">
+            <a class="page-link" href="">صقحه بعد</a>
+        </li>
+        {%endif%}
+    </ul>
+</nav>

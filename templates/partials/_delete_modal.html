@@ -1,0 +1,22 @@
+<!-- Modal -->
+<div class="modal fade" id="delete_article" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="{%url 'delete_article' article.id %}" method='POST'>
+                {%csrf_token%}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">مقاله : {{article.title}}</span>
+                    </button>
+                </div>
+                <div class="modal-body text-right">
+                    آیا مایل به حذف این مقاله هستین؟
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

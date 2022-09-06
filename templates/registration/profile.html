@@ -1,0 +1,60 @@
+{%extends 'registration/base_registration.html'%}
+{% load my_custom_tags %}
+{%block title%}پروفایل{%endblock%}
+{%block content%}
+<!-- Orders Table-->
+<div class="col-lg-8 pb-5">
+    <div class="d-flex justify-content-end pb-3">
+        <form action="{%url 'search_admin'%}">
+            <div class="form-inline">
+                <input id='search' type="text" name='search'>
+                <input type="submit" value='search'>
+            </div>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class=" table table-hover mb-0 ">
+            <thead>
+                <tr>
+                    <th>عنوان</th>
+                    <th>نویسنده</th>
+                    <th>وضعیت</th>
+                    <th>دسته بندی</th>
+                    <th>-</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for article in articles%}
+                <tr>
+                    <td><a class="navi-link" href="{%url 'update_article' article.id %}">{{article.title}}</a></td>
+                    <td>{{article.author}}</td>
+                    <td>{%if article.is_publish == 'p'%}
+                        <span class="badge bg-success m-0">
+                            {%elif article.is_publish == 'd' %}
+                            <span class="badge bg-info m-0">
+                                {%elif article.is_publish == 'i' %}
+                                <span class="badge bg-secondary m-0">
+                                    {%elif article.is_publish == 'b' %}
+                                    <span class="badge bg-warning m-0">
+                                        {%endif%}
+                                        {{article.get_is_publish_display}}
+                                    </span>
+                    </td>
+                    <td><span>{{article.category}}</span></td>
+                    <td><span><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_article">
+                                حذف
+                            </button>
+                            {%if article.is_publish == 'p'%}
+                            <a class='btn btn-success' href="{%url 'single' article.id %}">مشاهده در سایت</a>
+                            {%else%}
+                            <a class='btn btn-success' href="{%url 'preview' article.id %}">پیش نمایش</a>
+                            {%endif%}
+                        </span></td>
+                    {% delete_modal article%}
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,106 @@
+{%extends 'registration/base_registration.html'%}
+{%block title%} ایجاد و ویرایش مقاله{%endblock%}
+{%block content%}
+<div class="col-lg-8 pb-5">
+    <form action="{% if 'update-article' in request.path %} {% url 'update_article' article.id %} {% else %} {% url 'create_article' %} {% endif %}" method='POST' enctype='multipart/form-data'>
+        {%csrf_token%}
+        <div class="row">
+            <div class="col-lg-12"> {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <p {% if message.tags %} class=" alert alert-{{ message.tags }}" {% endif %}>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {%if form.errors%}
+                <div class='messages alert alert-danger'>
+                    <div>{{form.non_field_errors}}</div>
+                    {%for field in form%}
+                    <div>{{field.errors}}</div>
+                    {%endfor%}
+                </div>
+                {%endif%}</div>
+        </div>
+        <!-- Main content -->
+        <div class="row">
+            <!-- Left side -->
+            <div class="col-lg-8">
+                <!-- Basic information -->
+                <div class="cards mb-4">
+                    <div class="cards-body">
+                        <h3 class="h6 mb-4">ساخت مقاله</h3>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">عنوان</label>
+                                    {{form.title}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">آدرس</label>
+                                    {{form.slug}}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <ul class="list-group list-group-flush mx-n2">
+                                    <li class=" px-0 d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <h6 class="mb-0">مقاله برگزیده</h6>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            {{form.is_special}}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right side -->
+            <div class="col-lg-4">
+                <!-- Status -->
+                <div class="cards mb-4">
+                    <div class="cards-body">
+                        <h3 class="h6">وضعیت انتشار</h3>
+                        {{form.is_publish}}
+                    </div>
+                </div>
+                <!-- Status -->
+                <div class="cards mb-4">
+                    <div class="cards-body">
+                        <h3 class="h6">دسته بندی</h3>
+                        {{form.category}}
+                    </div>
+                </div>
+                <!-- Avatar -->
+                <div class="cards mb-4">
+                    <div class="cards-body">
+                        <h3 class="h6">تصویر</h3>
+                        {{form.image}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <!-- Address -->
+                <div class="cards mb-4">
+                    <div class="cards-body">
+                        <div class="mb-3">
+                            <label class="form-label">متن</label>
+                            {{form.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="cards mb-4">
+                    <input class='btn btn-success' type="submit">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{%endblock%}
