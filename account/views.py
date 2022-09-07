@@ -103,8 +103,15 @@ def contact(request):
 			to_mail,
 			[sender]
 			)
+			email2=mail.EmailMessage(
+			f'پیامی از طرف {name} با ایمیل {sender} دریافت شد. ',
+			f'پیام: \n{message}',
+			to_mail,
+			[to_mail]
+			)
 			
 			email.send() 
+			email2.send()
 			messages.success(request, 'thank you for commenting ,your message recieved')
 			return redirect('contact')
 

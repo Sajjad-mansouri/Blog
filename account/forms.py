@@ -32,10 +32,10 @@ class ContactForm(forms.Form):
 	subject = forms.CharField(max_length=100)
 	message = forms.CharField(widget=forms.Textarea)
 	email = forms.EmailField()
-	name.widget.attrs.update({'class': 'form-control p-4','required':"required",'placeholder':"Your Name"})
-	email.widget.attrs.update({'class': 'form-control p-4','required':"required",'placeholder':"Your Email"})
-	message.widget.attrs.update({'class': 'form-control ','required':"required",'placeholder':"Your message"})
-	subject.widget.attrs.update({'class': 'form-control p-4','required':"required",'placeholder':"Your subject"})
+	name.widget.attrs.update({'class': 'form-control p-4','required':"required",'placeholder':"نام"})
+	email.widget.attrs.update({'class': 'form-control p-4','required':"required",'placeholder':"ایمیل"})
+	message.widget.attrs.update({'class': 'form-control ','required':"required",'placeholder':"متن پیام"})
+	subject.widget.attrs.update({'class': 'form-control p-4','required':"required",'placeholder':"موضوع  پیام"})
 
 class CustomUserCreation(UserCreationForm):
 	class Meta:
